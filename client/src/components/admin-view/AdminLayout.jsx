@@ -3,7 +3,7 @@ import AdminSideBar from "./AdminHeader.jsx";
 import AdminHeader from "./AdminSidebar.jsx";
 import { useState } from "react";
 
-function AdminLayout() {
+const AdminLayout=()=> {
 
 
   return (

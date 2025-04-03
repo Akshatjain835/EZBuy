@@ -7,11 +7,22 @@ import AdminDashboard from "@/pages/admin-view/AdminDashboard.jsx";
 import AdminProducts from "@/pages/admin-view/AdminProducts.jsx";
 import AdminOrders from "@/pages/admin-view/AdminOrders.jsx";
 import AdminFeatures from "@/pages/admin-view/AdminFeatures.jsx";
+import ShoppingLayout from "@/components/shopping-view/ShoppingLayout.jsx";
+import NotFound from "@/pages/notfound/notfound.jsx";
+import ShoppingHome from "@/pages/shopping-view/ShoppingHome.jsx";
+import ShoppingListing from "@/pages/shopping-view/ShoppingListing.jsx";
+import ShoppingAccount from "@/pages/shopping-view/ShoppingAccount.jsx";
+import ShoppingCheckOut from "@/pages/shopping-view/ShoppingCheckOut.jsx";
+import CheckAuth from "@/components/common/CheckAuth.jsx";
+
+const isAuthenticated=false;
+const user=NULL;
 
 const appRouter = createBrowserRouter([
+ 
   {
     path: "/auth",
-    element: <AuthLayout />,
+    element: <CheckAuth isAuthenticated={isAuthenticated} user={user}><AuthLayout /></CheckAuth>,
 
     children: [
       {
@@ -26,7 +37,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path:"/admin",
-    element:<AdminLayout/>,
+    element:  <CheckAuth isAuthenticated={isAuthenticated} user={user}>  <AdminLayout /></CheckAuth>,
     children: [
         {
           path: "dashboard",
@@ -45,7 +56,38 @@ const appRouter = createBrowserRouter([
             element: <AdminFeatures />,
           },
       ],
+  },
+
+  {
+    path:"/shop",
+    element: <CheckAuth isAuthenticated={isAuthenticated} user={user}>  <ShoppingLayout />  </CheckAuth>,
+   
+ 
+    children: [
+        {
+          path: "home",
+          element: <ShoppingHome />,
+        },
+        {
+          path: "listing",
+          element: <ShoppingListing />,
+        },
+        {
+            path: "account",
+            element: <ShoppingAccount />,
+          },
+          {
+            path: "checkout",
+            element: <ShoppingCheckOut />,
+          },
+      ],
+  },
+  {
+    path:'*',
+    element:<NotFound/>
   }
+
+
 ]);
 
 export default appRouter;

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { motion } from "framer-motion";
 
-function AuthLayout() {
+const AuthLayout=()=>{
   return (
     <div className="flex min-h-screen w-full relative overflow-hidden">
       {/* Background with Gradient */}
