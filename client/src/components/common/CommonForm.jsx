@@ -113,7 +113,7 @@ const CommonForm = ({ formControls, formData, setFormData, onSubmit, buttonText,
         return element;
       }
   return (
-    <form >
+    <form onSubmit={onSubmit}>
       <div className="flex flex-col gap-3">
 
         {

@@ -14,6 +14,7 @@ import ShoppingListing from "@/pages/shopping-view/ShoppingListing.jsx";
 import ShoppingAccount from "@/pages/shopping-view/ShoppingAccount.jsx";
 import ShoppingCheckOut from "@/pages/shopping-view/ShoppingCheckOut.jsx";
 import CheckAuth from "@/components/common/CheckAuth.jsx";
+import UnauthPage from "@/pages/unauth-page/UnauthPage.jsx";
 
 const isAuthenticated=false;
 const user={
