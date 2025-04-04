@@ -16,7 +16,9 @@ import ShoppingCheckOut from "@/pages/shopping-view/ShoppingCheckOut.jsx";
 import CheckAuth from "@/components/common/CheckAuth.jsx";
 
 const isAuthenticated=false;
-const user=NULL;
+const user={
+   name:"Akshat"
+};
 
 const appRouter = createBrowserRouter([
  
@@ -85,6 +87,10 @@ const appRouter = createBrowserRouter([
   {
     path:'*',
     element:<NotFound/>
+  },
+  {
+    path:"/unauth-page",
+    element:<UnauthPage/>
   }
 
 
