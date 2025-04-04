@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser'
 import dotenv from "dotenv"
 import cors from 'cors'
 import connectDB from './config/connectDB.js'
+import userRouter from './routes/user.route.js'
 
 dotenv.config()
 
@@ -26,6 +27,8 @@ app.use(
       credentials: true,
     })
   );
+
+  app.use('/api/user',userRouter)
 
   app.get("/", (req, res) => {
     res.send("API is running...");
