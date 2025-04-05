@@ -18,9 +18,11 @@ import CheckAuth from "@/components/common/CheckAuth.jsx";
 import UnauthPage from "@/pages/unauth-page/UnauthPage.jsx";
 import { useEffect } from "react";
 import { checkAuth } from "@/redux/authslice/authSlice.js";
+import { Skeleton } from "@/components/ui/skeleton.jsx";
+
 
 const AppRouter = () => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const { user, isAuthenticated,isLoading } = useSelector((state) => state.auth);
   const dispatch=useDispatch();
 
   
@@ -28,6 +30,9 @@ const AppRouter = () => {
     dispatch(checkAuth());
   }, [dispatch]);
 
+  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+
+  // console.log(isLoading, user);
 
 
   const routes = useRoutes([
