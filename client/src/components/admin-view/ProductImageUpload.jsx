@@ -3,12 +3,14 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary.js";
 
 const ProductImageUpload = ({
   imageFile,
   setImageFile,
   imageLoadingState,
-
+  setUploadedImageUrl,
+  setImageLoadingState,
   isEditMode,
 
 }) => {
@@ -55,6 +57,12 @@ const ProductImageUpload = ({
   }
 //   console.log(imageFile)
 
+
+
+useEffect(() => {
+    if (imageFile !== null) 
+        uploadImageToCloudinary({ setUploadedImageUrl, setImageLoadingState});
+  }, [imageFile]);
   return (
     <div
       className={`w-full  mt-4 `}
