@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRoutes } from "react-router-dom";
-
 import AuthLayout from "@/components/auth/AuthLayout.jsx";
 import Login from "../pages/auth/Login.jsx";
 import Register from "../pages/auth/Register.jsx";
@@ -17,9 +16,19 @@ import ShoppingAccount from "@/pages/shopping-view/ShoppingAccount.jsx";
 import ShoppingCheckOut from "@/pages/shopping-view/ShoppingCheckOut.jsx";
 import CheckAuth from "@/components/common/CheckAuth.jsx";
 import UnauthPage from "@/pages/unauth-page/UnauthPage.jsx";
+import { useEffect } from "react";
+import { checkAuth } from "@/redux/authslice/authSlice.js";
 
 const AppRouter = () => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const dispatch=useDispatch();
+
+  
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
+
 
   const routes = useRoutes([
     {
