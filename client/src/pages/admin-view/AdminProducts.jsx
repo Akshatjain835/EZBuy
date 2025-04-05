@@ -1,8 +1,99 @@
-import React from 'react'
+import AdminProductTile from '@/components/admin-view/AdminProductTile';
+import CommonForm from '@/components/common/CommonForm';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { useToast } from '@/hooks/use-toast';
+import React, { Fragment, useState } from 'react'
+import { useDispatch } from 'react-redux';
+
 
 const AdminProducts = () => {
+  
+
+
+  const initialFormData = {
+    image: null,
+    title: "",
+    description: "",
+    category: "",
+    brand: "",
+    price: "",
+    salePrice: "",
+    totalStock: "",
+    averageReview: 0,
+  };
+
+  const [openCreateProductsDialog, setOpenCreateProductsDialog]=useState(false);
+  const [formData, setFormData] = useState(initialFormData);
+  const [imageFile, setImageFile] = useState(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+
+  const [currentEditedId, setCurrentEditedId] = useState(null);
+
+
+  const onSubmit=(e)=>{
+    e.preventDefault();
+
+   
+  }
+
+
   return (
-    <div>AdminProducts</div>
+    <Fragment>
+      <div className="mb-5 w-full flex justify-end">
+        <Button onClick={() => setOpenCreateProductsDialog(true)}>
+          Add New Product
+        </Button>
+      </div>
+      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
+        {productList && productList.length > 0
+          ? productList.map((productItem) => (
+              <AdminProductTile
+                setFormData={setFormData}
+                setOpenCreateProductsDialog={setOpenCreateProductsDialog}
+                setCurrentEditedId={setCurrentEditedId}
+                product={productItem}
+                handleDelete={handleDelete}
+              />
+            ))
+          : null}
+      </div>
+      <Sheet
+        open={openCreateProductsDialog}
+        onOpenChange={() => {
+          setOpenCreateProductsDialog(false);
+          setCurrentEditedId(null);
+          setFormData(initialFormData);
+        }}
+      >
+        <SheetContent side="right" className="overflow-auto">
+          <SheetHeader>
+            <SheetTitle>
+              {currentEditedId !== null ? "Edit Product" : "Add New Product"}
+            </SheetTitle>
+          </SheetHeader>
+          <ProductImageUpload
+
+            imageFile={imageFile}
+            setImageFile={setImageFile}
+            uploadedImageUrl={uploadedImageUrl}
+            setUploadedImageUrl={setUploadedImageUrl}
+          
+
+          />
+          <div className="py-6">
+            <CommonForm
+              onSubmit={onSubmit}
+              formData={formData}
+              setFormData={setFormData}
+              buttonText={currentEditedId !== null ? "Edit" : "Add"}
+              formControls={addProductFormElements}
+              isBtnDisabled={!isFormValid()}
+            />
+          </div>
+        </SheetContent>
+      </Sheet>
+    </Fragment>
   )
 }
 
