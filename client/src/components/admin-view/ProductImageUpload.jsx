@@ -9,8 +9,9 @@ const ProductImageUpload = ({
   imageFile,
   setImageFile,
   imageLoadingState,
-  setUploadedImageUrl,
   setImageLoadingState,
+  uploadedImageUrl,
+  setUploadedImageUrl,
   isEditMode,
 
 }) => {
@@ -63,6 +64,8 @@ useEffect(() => {
     if (imageFile !== null) 
         uploadImageToCloudinary({ setUploadedImageUrl, setImageLoadingState});
   }, [imageFile]);
+
+  
   return (
     <div
       className={`w-full  mt-4 `}

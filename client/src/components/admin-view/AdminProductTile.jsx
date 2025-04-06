@@ -2,7 +2,7 @@ import React from 'react'
 
 const AdminProductTile = () => {
   return (
-    <div>AdminProductTile</div>
+    <div></div>
   )
 }
 

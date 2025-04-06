@@ -3,6 +3,7 @@ import CommonForm from '@/components/common/CommonForm';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useToast } from '@/hooks/use-toast';
+import { addNewProduct, deleteProduct, editProduct, fetchAllProducts } from '@/redux/admin/adminProductSlice.js';
 import React, { Fragment, useState } from 'react'
 import { useDispatch } from 'react-redux';
 
@@ -31,12 +32,76 @@ const AdminProducts = () => {
 
   const [currentEditedId, setCurrentEditedId] = useState(null);
 
+  const { productList } = useSelector((state) => state.adminProducts);
+  // console.log(productList)
+
+  const dispatch = useDispatch();
+  const { toast } = useToast();
+
 
   const onSubmit=(e)=>{
     e.preventDefault();
 
+    currentEditedId !== null
+      ? dispatch(
+          editProduct({
+            id: currentEditedId,
+            formData,
+          })
+        ).then((data) => {
+          console.log(data, "edit");
+
+          if (data?.payload?.success) {
+            dispatch(fetchAllProducts());
+            setFormData(initialFormData);
+            setOpenCreateProductsDialog(false);
+            setCurrentEditedId(null);
+          }
+        })
+      : dispatch(
+
+          addNewProduct({
+            ...formData,
+            image: uploadedImageUrl,
+          })
+
+        ).then((data) => {
+          if (data?.payload?.success) {
+
+            dispatch(fetchAllProducts());
+            setOpenCreateProductsDialog(false);
+            setImageFile(null);
+            setFormData(initialFormData);
+
+            toast({
+              title: "Product add successfully",
+            });
+
+          }
+        });
+
    
   }
+
+  const handleDelete=(getCurrentProductId)=>{
+
+    dispatch(deleteProduct(getCurrentProductId)).then((data) => {
+
+      if (data?.payload?.success) {
+        dispatch(fetchAllProducts());
+      }
+
+    });
+  }
+
+
+
+
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
+
+  // console.log(formData, "productList");
 
 
   return (
