@@ -24,6 +24,50 @@ export const handleImageUploadController = async (req, res) => {
       });
     }
   };
+
+
+  //add a new product Controller
+export const addProductController = async (req, res) => {
+
+    try {
+
+      const { image,title,description,category,brand,price,salePrice,totalStock} = req.body;
+  
+      
+  
+      const newlyCreatedProduct = new Product({
+        image,
+        title,
+        description,
+        category,
+        brand,
+        price,
+        salePrice,
+        totalStock,
+      });
+  
+      await newlyCreatedProduct.save();
+
+      res.status(201).json({
+
+        success: true,
+        data: newlyCreatedProduct,
+        error:false,
+
+      });
+
+    } catch (e) {
+
+      // console.log(e);
+
+      res.status(500).json({
+        success: false,
+        message: "Error occured",
+        error:true
+      });
+    }
+  };
+  
   
 
 

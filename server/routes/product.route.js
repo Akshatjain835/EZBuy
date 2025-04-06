@@ -1,6 +1,7 @@
 
 import { Router } from "express";
 import { handleImageUploadController } from "../controllers/products.controller.js";
+import { upload } from "../utils/cloudinary.js";
 
 
 const productRouter = Router();
