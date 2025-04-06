@@ -1,11 +1,13 @@
 import AdminProductTile from '@/components/admin-view/AdminProductTile';
+import ProductImageUpload from '@/components/admin-view/ProductImageUpload';
 import CommonForm from '@/components/common/CommonForm';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { addProductFormElements } from '@/config';
 import { useToast } from '@/hooks/use-toast';
 import { addNewProduct, deleteProduct, editProduct, fetchAllProducts } from '@/redux/admin/adminProductSlice.js';
-import React, { Fragment, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { Fragment, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const AdminProducts = () => {
@@ -21,7 +23,7 @@ const AdminProducts = () => {
     price: "",
     salePrice: "",
     totalStock: "",
-    averageReview: 0,
+    
   };
 
   const [openCreateProductsDialog, setOpenCreateProductsDialog]=useState(false);
@@ -93,9 +95,13 @@ const AdminProducts = () => {
 
     });
   }
+  
+  const isFormValid=()=>{
 
-
-
+    return Object.keys(formData)
+      .map((key)=>formData[key]!=="")
+      .every((item)=>item)
+  }
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -146,7 +152,7 @@ const AdminProducts = () => {
             setUploadedImageUrl={setUploadedImageUrl}
             imageLoadingState={imageLoadingState}
             setImageLoadingState={setImageLoadingState}
-          
+            isEditMode={currentEditedId !== null}
 
           />
           <div className="py-6">

@@ -30,7 +30,7 @@ app.use(
   );
 
   app.use('/api/user',userRouter)
-  app.use('/api/admin/product',productRouter)
+  app.use('/api/admin/products',productRouter)
 
   app.get("/", (req, res) => {
     res.send("API is running...");

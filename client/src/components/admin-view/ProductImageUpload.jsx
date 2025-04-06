@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary.js";
+import { Button } from "../ui/button";
 
 const ProductImageUpload = ({
   imageFile,
@@ -13,10 +14,12 @@ const ProductImageUpload = ({
   uploadedImageUrl,
   setUploadedImageUrl,
   isEditMode,
+  isCustomStyling=false
 
 }) => {
 
   const inputRef = useRef(null);
+  
 //   console.log(isEditMode, "isEditMode");
 
   const handleImageFileChange=(e)=>{
@@ -62,13 +65,13 @@ const ProductImageUpload = ({
 
 useEffect(() => {
     if (imageFile !== null) 
-        uploadImageToCloudinary({ setUploadedImageUrl, setImageLoadingState});
+        uploadImageToCloudinary({ setUploadedImageUrl, setImageLoadingState,imageFile});
   }, [imageFile]);
 
-  
+
   return (
     <div
-      className={`w-full  mt-4 `}
+    className={`w-full  mt-4 ${isCustomStyling ? "" : "max-w-md mx-auto"}`}
     >
       <Label className="text-lg font-semibold mb-2 block">Upload Image</Label>
       <div
