@@ -6,7 +6,7 @@ export const uploadImageToCloudinary=async({ setUploadedImageUrl, setImageLoadin
 
     const data = new FormData();
 
-    data.append("myfile", imageFile);
+    data.append("image", imageFile);
     const response = await axios.post(
       "http://localhost:5000/api/admin/products/upload-image",
       data
