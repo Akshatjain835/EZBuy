@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
 import { Button } from '../ui/button'
-import HeaderRightContent from './HeaderRightContent'
+import HeaderRightContent from './HeaderRightContent.jsx'
 import { useSelector } from 'react-redux'
 import MenuItems from './MenuItems'
 
