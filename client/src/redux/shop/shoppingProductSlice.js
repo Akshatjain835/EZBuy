@@ -5,6 +5,7 @@ import axios from "axios";
 const initialState = {
   isLoading: false,
   productList: [],
+  productDetails:null
  
 };
 
@@ -29,6 +30,17 @@ export const fetchAllFilteredProducts = createAsyncThunk( "/products/fetchAllPro
   }
 );
 
+export const fetchProductDetails = createAsyncThunk( "/products/fetchProductDetails",
+
+    async (id) => {
+    const result = await axios({
+      ...SummaryApi.fetchProductDetails(id),
+    });
+
+    console.log(result);
+
+    return result?.data;
+  });
 
 
 const shoppingProductSlice = createSlice({
@@ -50,6 +62,17 @@ const shoppingProductSlice = createSlice({
         state.isLoading = false;
         state.productList = [];
       })
+      .addCase(fetchProductDetails.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchProductDetails.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.productDetails = action.payload.data;
+      })
+      .addCase(fetchProductDetails.rejected, (state, action) => {
+        state.isLoading = false;
+        state.productDetails = null;
+      });
 }
  
 });

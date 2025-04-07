@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { getFilteredProductsController } from "../../controllers/shop/product.controller.js";
+import { getFilteredProductsController, getProductDetailsController } from "../../controllers/shop/product.controller.js";
 
-const shopProductRouter = express.Router();
+const shopProductRouter =Router();
 
 shopProductRouter.get("/get", getFilteredProductsController);
+shopProductRouter.get("/get/:id", getProductDetailsController);
 
 
-module.exports = shopProductRouter;
+export default shopProductRouter

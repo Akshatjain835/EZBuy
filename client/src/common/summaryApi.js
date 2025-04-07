@@ -23,6 +23,11 @@ const SummaryApi={
         url: `${baseUrl}/api/shop/products/get?${query}`,
         method: "get",
       }),
+
+      fetchProductDetails: (id) => ({
+        url: `${baseUrl}/api/shop/products/get/${id}`,
+        method: "get",
+      }),
 }
 
 export default SummaryApi
