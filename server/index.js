@@ -4,7 +4,8 @@ import dotenv from "dotenv"
 import cors from 'cors'
 import connectDB from './config/connectDB.js'
 import userRouter from './routes/user.route.js'
-import productRouter from './routes/product.route.js'
+import productRouter from './routes/admin/product.route.js'
+import shopProductRouter from './routes/shop/products.route.js'
 
 dotenv.config()
 
@@ -31,6 +32,7 @@ app.use(
 
   app.use('/api/user',userRouter)
   app.use('/api/admin/products',productRouter)
+  app.use('/api/shop/products',shopProductRouter)
 
   app.get("/", (req, res) => {
     res.send("API is running...");

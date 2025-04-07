@@ -1,7 +1,7 @@
 // controllers/productController.js
 
-import Product from "../models/products.model.js";
-import { imageUploadUtil } from "../utils/cloudinary.js";
+import Product from "../../models/products.model.js";
+import { imageUploadUtil } from "../../utils/cloudinary.js";
 
 
 export const handleImageUploadController = async (req, res) => {

@@ -1,7 +1,7 @@
 
 import { Router } from "express";
-import { addProductController, deleteProductController, editProductController, fetchAllProductsController, handleImageUploadController } from "../controllers/products.controller.js";
-import { upload } from "../utils/cloudinary.js";
+import { addProductController, deleteProductController, editProductController, fetchAllProductsController, handleImageUploadController } from "../../controllers/admin/products.controller.js";
+import { upload } from "../../utils/cloudinary.js";
 
 
 const productRouter = Router();

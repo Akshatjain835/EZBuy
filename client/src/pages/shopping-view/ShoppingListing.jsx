@@ -2,11 +2,20 @@ import ProductFilter from '@/components/shopping-view/ProductFilter.jsx'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { sortOptions } from '@/config'
+import { fetchAllProducts } from '@/redux/admin/adminProductSlice'
 import { ArrowUpDownIcon } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 const ShoppingListing = () => {
+  const dispatch=useDispatch();
+
+  useEffect(()=>{
+    dispatch(fetchAllProducts())
+  })
+  
   return (
+    
     <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
     <ProductFilter  />
 
@@ -53,6 +62,7 @@ const ShoppingListing = () => {
           </DropdownMenu>
         </div>
       </div>
+      
 
       
     </div>
