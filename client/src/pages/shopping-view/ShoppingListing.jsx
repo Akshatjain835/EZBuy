@@ -3,20 +3,22 @@ import ShoppingProductTile from '@/components/shopping-view/ShoppingProductTile'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { sortOptions } from '@/config'
-import { fetchAllFilteredProducts } from '@/redux/shop/shoppingProductSlice'
+import { fetchAllFilteredProducts, fetchProductDetails } from '@/redux/shop/shoppingProductSlice'
 import { ArrowUpDownIcon } from 'lucide-react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import CreateSearchParams from './helper/CreateSearchParams'
+import ProductDetailsDialog from '@/components/shopping-view/ProductDetailsDialog.jsx'
 
 const ShoppingListing = () => {
 
   const dispatch=useDispatch();
-  const { productList } = useSelector( (state) => state.shopProducts);
+  const { productList,productDetails } = useSelector( (state) => state.shopProducts);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
 
   const handleSort=(value)=>{
@@ -52,6 +54,12 @@ const ShoppingListing = () => {
     sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
   }
 
+  const handleGetProductDetails=(getCurrentProductId)=>{
+
+    // console.log(getCurrentProductId);
+    dispatch(fetchProductDetails(getCurrentProductId));
+  }
+
   useEffect(() => {
 
     setSort("price-lowtohigh");
@@ -76,6 +84,11 @@ const ShoppingListing = () => {
 
   // console.log("filters",filters)
   // console.log("filters",searchParams)
+  //console.log(productDetails)
+
+  useEffect(() => {
+    if (productDetails !== null) setOpenDetailsDialog(true);
+  }, [productDetails]);
 
   
   return (
@@ -131,6 +144,7 @@ const ShoppingListing = () => {
           {productList && productList.length > 0
             ? productList.map((productItem) => (
                 <ShoppingProductTile
+                handleGetProductDetails={handleGetProductDetails}
                 product={productItem}
                 />
               ))
@@ -139,6 +153,9 @@ const ShoppingListing = () => {
       </div>
       <ProductDetailsDialog
         productDetails={productDetails}
+        open={openDetailsDialog}
+        setOpen={setOpenDetailsDialog}
+        
       />
     </div>
   )
