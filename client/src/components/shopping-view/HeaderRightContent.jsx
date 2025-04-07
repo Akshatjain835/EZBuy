@@ -1,26 +1,26 @@
 import { logoutUser } from '@/redux/authslice/authSlice';
-import { Sheet, ShoppingCart } from 'lucide-react';
-import React, { useEffect } from 'react'
+import { LogOut, Sheet, ShoppingCart, UserCog } from 'lucide-react';
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import { Avatar, AvatarFallback } from '../ui/avatar';
+import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu';
+
 
 const HeaderRightContent=()=>{
 
     const { user } = useSelector((state) => state.auth);
-    const { cartItems } = useSelector((state) => state.shopCart);
+    // console.log(user)
 
-    const [openCartSheet, setOpenCartSheet] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
   
-    function handleLogout() {
+    const handleLogout=()=>{
       dispatch(logoutUser());
     }
-  
-    useEffect(() => {
-      dispatch(fetchCartItems(user?.id));
-    }, [dispatch]);
+
   
     // console.log(cartItems, "Akshat ");
   
@@ -35,18 +35,11 @@ const HeaderRightContent=()=>{
           >
             <ShoppingCart className="w-6 h-6" />
             <span className="absolute top-[-5px] right-[2px] font-bold text-sm">
-              {cartItems?.items?.length || 0}
+              
             </span>
             <span className="sr-only">User cart</span>
           </Button>
-          <UserCartWrapper
-          
-            cartItems={
-              cartItems && cartItems.items && cartItems.items.length > 0
-                ? cartItems.items
-                : []
-            }
-          />
+
         </Sheet>
   
         <DropdownMenu>
@@ -65,7 +58,7 @@ const HeaderRightContent=()=>{
               Account
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem >
+            <DropdownMenuItem onClick={handleLogout} >
               <LogOut className="mr-2 h-4 w-4" />
               Logout
             </DropdownMenuItem>
@@ -74,3 +67,5 @@ const HeaderRightContent=()=>{
       </div>
     );
   }
+
+  export default HeaderRightContent;

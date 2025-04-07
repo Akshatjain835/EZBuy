@@ -10,6 +10,7 @@ import MenuItems from './MenuItems'
 const ShoppingHeader = () => {
 
   const { isAuthenticated } = useSelector((state) => state.auth);
+  // console.log(user)
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">

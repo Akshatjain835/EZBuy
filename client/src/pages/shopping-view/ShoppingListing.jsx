@@ -1,8 +1,11 @@
+import ProductFilter from '@/components/shopping-view/ProductFilter'
 import React from 'react'
 
 const ShoppingListing = () => {
   return (
-    <div>ShoppingListing</div>
+    <div>ShoppingListing
+       <ProductFilter/>
+    </div>
   )
 }
 
