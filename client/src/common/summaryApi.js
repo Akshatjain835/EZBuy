@@ -18,6 +18,11 @@ const SummaryApi={
         url: `${baseUrl}/api/admin/products/delete/${id}`,
         method: "delete",
       }),
+
+      fetchFilteredProducts: (query) => ({
+        url: `${baseUrl}/api/shop/products/get?${query}`,
+        method: "get",
+      }),
 }
 
 export default SummaryApi
