@@ -7,6 +7,8 @@ import { fetchAllFilteredProducts } from '@/redux/shop/shoppingProductSlice'
 import { ArrowUpDownIcon } from 'lucide-react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
+import CreateSearchParams from './helper/CreateSearchParams'
 
 const ShoppingListing = () => {
 
@@ -14,6 +16,7 @@ const ShoppingListing = () => {
   const { productList } = useSelector( (state) => state.shopProducts);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
 
   const handleSort=(value)=>{
@@ -53,8 +56,15 @@ const ShoppingListing = () => {
 
     setSort("price-lowtohigh");
     setFilters(JSON.parse(sessionStorage.getItem("filters")) || {});
-    
-  }, [categorySearchParam]);
+
+  }, []);
+
+  useEffect(() => {
+    if (filters && Object.keys(filters).length > 0) {
+      const createQueryString = CreateSearchParams(filters);
+      setSearchParams(new URLSearchParams(createQueryString));
+    }
+  }, [filters]);
 
 
   useEffect(()=>{
@@ -62,6 +72,7 @@ const ShoppingListing = () => {
   })
 
   // console.log("filters",filters)
+  // console.log("filters",searchParams)
 
   
   return (
