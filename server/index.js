@@ -6,6 +6,7 @@ import connectDB from './config/connectDB.js'
 import userRouter from './routes/user.route.js'
 import productRouter from './routes/admin/product.route.js'
 import shopProductRouter from './routes/shop/products.route.js'
+import cartRouter from './routes/shop/cart.route.js'
 
 dotenv.config()
 
@@ -33,6 +34,7 @@ app.use(
   app.use('/api/user',userRouter)
   app.use('/api/admin/products',productRouter)
   app.use('/api/shop/products',shopProductRouter)
+  app.use('/api/shop/cart',cartRouter)
 
   app.get("/", (req, res) => {
     res.send("API is running...");
