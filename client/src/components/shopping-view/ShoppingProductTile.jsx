@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { brandOptionsMap, categoryOptionsMap } from '@/config'
 import React from 'react'
+import { Badge } from '../ui/badge'
 
 const ShoppingProductTile = ({product ,handleGetProductDetails}) => {
   return (
