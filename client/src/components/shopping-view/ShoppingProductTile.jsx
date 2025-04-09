@@ -4,7 +4,8 @@ import { brandOptionsMap, categoryOptionsMap } from '@/config'
 import React from 'react'
 import { Badge } from '../ui/badge'
 
-const ShoppingProductTile = ({product ,handleGetProductDetails}) => {
+const ShoppingProductTile = ({product ,handleGetProductDetails,  handleAddtoCart}) => {
+
   return (
     <Card className="w-full max-w-sm mx-auto">
       <div onClick={() => handleGetProductDetails(product?._id)} >
@@ -77,8 +78,8 @@ const ShoppingProductTile = ({product ,handleGetProductDetails}) => {
           </Button>
         ) : (
           <Button
-           
             className="w-full"
+            onClick={() => handleAddtoCart(product?._id, product?.totalStock)}
           >
             Add to cart
           </Button>

@@ -10,15 +10,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import CreateSearchParams from './helper/CreateSearchParams'
 import ProductDetailsDialog from '@/components/shopping-view/ProductDetailsDialog.jsx'
+import { addToCart, fetchCartItems } from '@/redux/shop/shoppingCartSlice'
+import { useToast } from '@/hooks/use-toast'
 
 const ShoppingListing = () => {
 
   const dispatch=useDispatch();
+
   const { productList,productDetails } = useSelector( (state) => state.shopProducts);
+
+  const { cartItems } = useSelector((state) => state.shopCart);
+  const { user } = useSelector((state) => state.auth);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+
+  const { toast } = useToast();
+
+
 
 
   const handleSort=(value)=>{
@@ -58,6 +68,28 @@ const ShoppingListing = () => {
 
     // console.log(getCurrentProductId);
     dispatch(fetchProductDetails(getCurrentProductId));
+  }
+
+  const handleAddtoCart=(getCurrentProductId)=>{
+    // console.log(cartItems,"cartitemssection");
+  
+
+    dispatch(
+      addToCart({
+        userId: user?.id,
+        productId: getCurrentProductId,
+        quantity: 1,
+      })
+
+    ).then((data) => {
+
+      if (data?.payload?.success) {
+        dispatch(fetchCartItems(user?.id));
+        toast({
+          title: "Product is added to cart",
+        });
+      }
+    });
   }
 
   useEffect(() => {
@@ -146,6 +178,7 @@ const ShoppingListing = () => {
                 <ShoppingProductTile
                 handleGetProductDetails={handleGetProductDetails}
                 product={productItem}
+                handleAddtoCart={handleAddtoCart}
                 />
               ))
             : null}
