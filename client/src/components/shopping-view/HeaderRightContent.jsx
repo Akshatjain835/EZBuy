@@ -7,12 +7,14 @@ import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '../ui/avatar';
 import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu';
+import UserCartWrapper from './UserCartWrapper';
 
 
 const HeaderRightContent=()=>{
 
     const { user } = useSelector((state) => state.auth);
     // console.log(user)
+    const [openCartSheet, setOpenCartSheet] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -26,9 +28,10 @@ const HeaderRightContent=()=>{
   
     return (
       <div className="flex lg:items-center lg:flex-row flex-col gap-4">
-        <Sheet>
+        <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
           <Button
-    
+
+            onClick={() => setOpenCartSheet(true)}
             variant="outline"
             size="icon"
             className="relative"
@@ -40,6 +43,14 @@ const HeaderRightContent=()=>{
             <span className="sr-only">User cart</span>
           </Button>
 
+          <UserCartWrapper
+          setOpenCartSheet={setOpenCartSheet}
+          cartItems={
+            cartItems && cartItems.items && cartItems.items.length > 0
+              ? cartItems.items
+              : []
+          }
+        />
         </Sheet>
   
         <DropdownMenu>
