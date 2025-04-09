@@ -28,6 +28,26 @@ const SummaryApi={
         url: `${baseUrl}/api/shop/products/get/${id}`,
         method: "get",
       }),
+
+      addToCart: {
+        url: `${baseUrl}/api/shop/cart/add`,
+        method: "post"
+      },
+
+      fetchCartItems: {
+        url: `${baseUrl}/api/shop/cart/get`, 
+        method: "get",
+      },
+
+      deleteCartItem: {
+        url: `${baseUrl}/api/shop/cart`, 
+        method: "delete",
+      },
+
+      updateCartQuantity: {
+        url: `${baseUrl}/api/shop/cart/update-cart`,
+        method: "put",
+      },
 }
 
 export default SummaryApi
