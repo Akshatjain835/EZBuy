@@ -4,8 +4,52 @@ import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
 import { Avatar, AvatarFallback } from '../ui/avatar'
 import { Label } from '../ui/label'
+import { addToCart, fetchCartItems } from '@/redux/shop/shoppingCartSlice'
+import { useToast } from '@/hooks/use-toast'
+import { useDispatch, useSelector } from 'react-redux'
 
 const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
+
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.shopCart);
+
+  const { toast } = useToast();
+
+  const handleAddToCart=(getCurrentProductId, getTotalStock)=>{
+    let getCartItems = cartItems.items || [];
+
+    if (getCartItems.length) {
+      const indexOfCurrentItem = getCartItems.findIndex(
+        (item) => item.productId === getCurrentProductId
+      );
+      if (indexOfCurrentItem > -1) {
+        const getQuantity = getCartItems[indexOfCurrentItem].quantity;
+        if (getQuantity + 1 > getTotalStock) {
+          toast({
+            title: `Only ${getQuantity} quantity can be added for this item`,
+            variant: "destructive",
+          });
+
+          return;
+        }
+      }
+    }
+    dispatch(
+      addToCart({
+        userId: user?.id,
+        productId: getCurrentProductId,
+        quantity: 1,
+      })
+    ).then((data) => {
+      if (data?.payload?.success) {
+        dispatch(fetchCartItems(user?.id));
+        toast({
+          title: "Product is added to cart",
+        });
+      }
+    });
+  }
 
   return (
     <Dialog open={open} >
