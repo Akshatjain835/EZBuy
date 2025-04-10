@@ -2,10 +2,13 @@ import ProductDetailsDialog from '@/components/shopping-view/ProductDetailsDialo
 import ShoppingProductTile from '@/components/shopping-view/ShoppingProductTile'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { fetchAllFilteredProducts } from '@/redux/shop/shoppingProductSlice'
+import { useToast } from '@/hooks/use-toast'
+import { addToCart, fetchCartItems } from '@/redux/shop/shoppingCartSlice'
+import { fetchAllFilteredProducts, fetchProductDetails } from '@/redux/shop/shoppingProductSlice'
 import { Airplay, BabyIcon, ChevronLeftIcon, ChevronRightIcon, CloudLightning, Heater, Images, Shirt, ShirtIcon, ShoppingBasket, UmbrellaIcon, WashingMachine, WatchIcon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const categoriesWithIcon = [
   { id: "men", label: "Men", icon: ShirtIcon },
@@ -28,8 +31,51 @@ const ShoppingHome = () => {
   const slides=[img-1,img-2,img-3]
   const [currentSlide, setCurrentSlide] = useState(0);
   const { productList, productDetails } = useSelector( (state) => state.shopProducts);
+  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
+   const handleNavigateToListingPage=(getCurrentItem, section)=>{
+  
+        sessionStorage.removeItem("filters");
+        const currentFilter = {
+          [section]: [getCurrentItem.id],
+        };
+    
+        sessionStorage.setItem("filters", JSON.stringify(currentFilter));
+        navigate(`/shop/listing`);
+      }
+
+   const handleGetProductDetails=(getCurrentProductId)=>{
+    dispatch(fetchProductDetails(getCurrentProductId));
+  }
+    
+  const handleAddtoCart=(getCurrentProductId)=>{
+
+    dispatch(
+
+      addToCart({
+        userId: user?.id,
+        productId: getCurrentProductId,
+        quantity: 1,
+      })
+
+    ).then((data) => {
+
+      if (data?.payload?.success) {
+        dispatch(fetchCartItems(user?.id));
+        toast({
+          title: "Product is added to cart",
+        });
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (productDetails !== null) setOpenDetailsDialog(true);
+  }, [productDetails]);
 
   useEffect(() => {
     const timer = setInterval(() => {

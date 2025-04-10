@@ -20,17 +20,7 @@ const HeaderRightContent=()=>{
     const dispatch = useDispatch();
   
 
-    const handleNavigateToListingPage=(getCurrentItem, section)=>{
-
-      sessionStorage.removeItem("filters");
-      const currentFilter = {
-        [section]: [getCurrentItem.id],
-      };
-  
-      sessionStorage.setItem("filters", JSON.stringify(currentFilter));
-      navigate(`/shop/listing`);
-    }
-  
+   
   
     const handleLogout=()=>{
       dispatch(logoutUser());
