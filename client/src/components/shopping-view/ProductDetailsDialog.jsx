@@ -7,6 +7,7 @@ import { Label } from '../ui/label'
 import { addToCart, fetchCartItems } from '@/redux/shop/shoppingCartSlice'
 import { useToast } from '@/hooks/use-toast'
 import { useDispatch, useSelector } from 'react-redux'
+import { setProductDetails } from '@/redux/shop/shoppingProductSlice.js'
 
 const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
 
@@ -15,6 +16,11 @@ const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
   const { cartItems } = useSelector((state) => state.shopCart);
 
   const { toast } = useToast();
+
+  const handleDialogClose=()=>{
+    setOpen(false);
+    dispatch(setProductDetails());
+  }
 
   const handleAddToCart=(getCurrentProductId, getTotalStock)=>{
     let getCartItems = cartItems.items || [];
@@ -52,7 +58,7 @@ const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
   }
 
   return (
-    <Dialog open={open} >
+    <Dialog open={open} onOpenChange={handleDialogClose} >
 
     <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
 
