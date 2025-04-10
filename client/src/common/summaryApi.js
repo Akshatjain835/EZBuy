@@ -48,6 +48,26 @@ const SummaryApi={
         url: `${baseUrl}/api/shop/cart/update-cart`,
         method: "put",
       },
+
+      addUserAddress: {
+        url: `${baseUrl}/api/shop/address/add`,
+        method: "post",
+      },
+
+      getUserAddresses:{
+        url: `${baseUrl}/api/shop/address/get/`,
+        method: "get",
+      },
+
+      updateAddress: {
+        method: "PUT",
+        url: `${baseUrl}/shop/address/update`,
+      },
+      deleteAddress: {
+        method: "DELETE",
+        url: `${baseUrl}/shop/address/delete`,
+      },
+
 }
 
 export default SummaryApi
