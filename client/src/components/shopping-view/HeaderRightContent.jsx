@@ -15,12 +15,12 @@ const HeaderRightContent=()=>{
     const { user } = useSelector((state) => state.auth);
     // console.log(user)
     const [openCartSheet, setOpenCartSheet] = useState(false);
+    const { cartItems } = useSelector((state) => state.shopCart);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
   
 
-   
   
     const handleLogout=()=>{
       dispatch(logoutUser());
