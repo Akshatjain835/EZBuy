@@ -60,12 +60,17 @@ const SummaryApi={
       },
 
       updateAddress: {
-        method: "PUT",
+        method: "put",
         url: `${baseUrl}/shop/address/update`,
       },
       deleteAddress: {
-        method: "DELETE",
+        method: "delete",
         url: `${baseUrl}/shop/address/delete`,
+      },
+
+      createOrder: {
+        method: "psot",
+        url: `${baseUrl}/order/create`,
       },
 
 }
