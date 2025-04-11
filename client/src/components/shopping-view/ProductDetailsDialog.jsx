@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setProductDetails } from '@/redux/shop/shoppingProductSlice.js'
 
 const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
-
+  
+  if (!productDetails) return null; 
+  
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
@@ -58,7 +60,7 @@ const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
   }
 
   return (
-    <Dialog open={open} onOpenChange={handleDialogClose} >
+  <Dialog open={open} onOpenChange={handleDialogClose} >
 
     <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
 
@@ -142,6 +144,7 @@ const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
         </div>
       </div>
     </DialogContent>
+
   </Dialog>
   )
 }
