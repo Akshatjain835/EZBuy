@@ -7,7 +7,7 @@ import { toast } from '@/hooks/use-toast';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const Address = () => {
+const Address = ({setCurrentSelectedAddress}) => {
 
   const initialAddressFormData = {
     address: "",
