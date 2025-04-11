@@ -4,10 +4,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { Badge } from '../ui/badge';
 import { Dialog } from '../ui/dialog';
 import { Button } from '../ui/button';
-import { useSelector } from 'react-redux';
+import ShoppingOrderDetailsView from './ShoppingOrderDetailsView';
 
 const ShoppingOrders = () => {
-  const { orderList, orderDetails } = useSelector((state) => state.adminOrder);
+
+
+ 
   return (
     <Card>
       <CardHeader>
@@ -27,41 +29,30 @@ const ShoppingOrders = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {
-            orderList && orderList.length > 0
-              ? orderList.map((orderItem) => (
+          
                   <TableRow>
-                    <TableCell>{orderItem?._id}</TableCell>
-                    <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
                     <TableCell>
-                      <Badge
-                        className={`py-1 px-3 ${
-                          orderItem?.orderStatus === "confirmed"
-                            ? "bg-green-500"
-                            : orderItem?.orderStatus === "rejected"
-                            ? "bg-red-600"
-                            : "bg-black"
-                        }`}
-                      >
-                        {orderItem?.orderStatus}
+                      <Badge>
                       </Badge>
                     </TableCell>
-                    <TableCell>${orderItem?.totalAmount}</TableCell>
+                    <TableCell>totalAmount</TableCell>
                     <TableCell>
-                      <Dialog
+                    <Dialog
+                        open={openDetailsDialog}
                        
                       >
                         <Button
-                        
                         >
                           View Details
                         </Button>
-                        
+                        <ShoppingOrderDetailsView/>
                       </Dialog>
+
                     </TableCell>
                   </TableRow>
-                ))
-              : null}
+              
           </TableBody>
         </Table>
       </CardContent>
