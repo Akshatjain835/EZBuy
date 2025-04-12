@@ -9,6 +9,7 @@ import shopProductRouter from './routes/shop/products.route.js'
 import cartRouter from './routes/shop/cart.route.js'
 import addressRouter from './routes/shop/address.route.js'
 import orderRouter from './routes/shop/order.route.js'
+import adminOrderRouter from './routes/admin/order.route.js'
 
 dotenv.config()
 
@@ -35,6 +36,7 @@ app.use(
 
   app.use('/api/user',userRouter)
   app.use('/api/admin/products',productRouter)
+  app.use('/api/admin/orders',adminOrderRouter)
   app.use('/api/shop/products',shopProductRouter)
   app.use('/api/shop/cart',cartRouter)
   app.use('/api/shop/address',addressRouter)
