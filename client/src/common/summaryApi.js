@@ -78,6 +78,15 @@ const SummaryApi={
         url: `${baseUrl}/order/capture`,
       },
 
+      getAllOrdersByUserId: {
+        method: "get",
+        url: `${baseUrl}/order/list`, 
+      },
+      getOrderDetails: {
+        method: "get",
+        url: `${baseUrl}/order/details`, 
+      },
+
 }
 
 export default SummaryApi
