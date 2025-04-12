@@ -73,6 +73,11 @@ const SummaryApi={
         url: `${baseUrl}/order/create`,
       },
 
+      capturePayment: {
+        method: "post",
+        url: `${baseUrl}/order/capture`,
+      },
+
 }
 
 export default SummaryApi
