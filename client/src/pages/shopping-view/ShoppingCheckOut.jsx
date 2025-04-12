@@ -5,6 +5,7 @@ import UserCartItemsContent from '@/components/shopping-view/UserCartItemsConten
 import { Button } from '@/components/ui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToast } from '@/hooks/use-toast';
+import { createNewOrder } from '@/redux/shop/shoppingOrderSlice';
 const ShoppingCheckOut = () => {
 
   const { cartItems } = useSelector((state) => state.shopCart);
@@ -32,9 +33,10 @@ const ShoppingCheckOut = () => {
       : 0;
 
 
-    const handleInitiatePaypalPayment=()=>{
+ const handleInitiatePaypalPayment=()=>{
 
         if (cartItems.length === 0) {
+
           toast({
             title: "Your cart is empty. Please add items to proceed",
             variant: "destructive",
@@ -42,6 +44,7 @@ const ShoppingCheckOut = () => {
     
           return;
         }
+
         if (currentSelectedAddress === null) {
           toast({
             title: "Please select one address to proceed.",
@@ -96,6 +99,7 @@ const ShoppingCheckOut = () => {
       if (approvalURL) {
         window.location.href = approvalURL;
       }
+
       
   return (
     <div className="flex flex-col">
