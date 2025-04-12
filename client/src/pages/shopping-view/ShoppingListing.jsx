@@ -27,8 +27,8 @@ const ShoppingListing = () => {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
   const { toast } = useToast();
-
-
+   
+  const categorySearchParam = searchParams.get("category");
 
 
   const handleSort=(value)=>{
@@ -98,7 +98,7 @@ const ShoppingListing = () => {
     setSort("price-lowtohigh");
     setFilters(JSON.parse(sessionStorage.getItem("filters")) || {});
 
-  }, []);
+  }, [categorySearchParam]);
 
   useEffect(() => {
     if (filters && Object.keys(filters).length > 0) {
