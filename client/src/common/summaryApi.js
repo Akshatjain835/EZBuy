@@ -61,31 +61,46 @@ const SummaryApi={
 
       updateAddress: {
         method: "put",
-        url: `${baseUrl}/shop/address/update`,
+        url: `${baseUrl}/api/shop/address/update`,
       },
       deleteAddress: {
         method: "delete",
-        url: `${baseUrl}/shop/address/delete`,
+        url: `${baseUrl}/api/shop/address/delete`,
       },
 
       createOrder: {
         method: "psot",
-        url: `${baseUrl}/order/create`,
+        url: `${baseUrl}/api/shop/order/create`,
       },
 
       capturePayment: {
         method: "post",
-        url: `${baseUrl}/order/capture`,
+        url: `${baseUrl}/api/shop/order/capture`,
       },
 
       getAllOrdersByUserId: {
         method: "get",
-        url: `${baseUrl}/order/list`, 
+        url: `${baseUrl}/api/shop/order/list`, 
       },
       getOrderDetails: {
         method: "get",
-        url: `${baseUrl}/order/details`, 
+        url: `${baseUrl}/api/shop/order/details`, 
       },
+
+      getAllOrdersForAdmin: {
+        method: "GET",
+        url: `${baseUrl}/api/admin/orders/get`,
+      },
+
+      getOrderDetailsForAdmin: {
+        method: "get",
+        url: `${baseUrl}/api/admin/orders/details` 
+      },
+      updateOrderStatus: {
+        method: "put",
+        url: `${baseUrl}/api/admin/orders/update` 
+      }
+
 
 }
 
