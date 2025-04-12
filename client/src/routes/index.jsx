@@ -19,6 +19,7 @@ import UnauthPage from "@/pages/unauth-page/UnauthPage.jsx";
 import { useEffect } from "react";
 import { checkAuth } from "@/redux/authslice/authSlice.js";
 import { Skeleton } from "@/components/ui/skeleton.jsx";
+import PaypalReturnPage from "@/pages/shopping-view/PaypalReturnPage.jsx";
 
 
 const AppRouter = () => {
@@ -74,6 +75,7 @@ const AppRouter = () => {
         { path: "listing", element: <ShoppingListing /> },
         { path: "account", element: <ShoppingAccount /> },
         { path: "checkout", element: <ShoppingCheckOut /> },
+        {path:"paypal-return " , element:<PaypalReturnPage/>},
       ],
     },
     {
