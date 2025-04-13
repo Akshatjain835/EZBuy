@@ -39,6 +39,15 @@ const AppRouter = () => {
 
   const routes = useRoutes([
     {
+          path:"/",
+          element:(
+            <CheckAuth
+              isAuthenticated={isAuthenticated}
+              user={user}
+            ></CheckAuth>
+          )
+    },
+    {
       path: "/auth",
       element: (
         <CheckAuth isAuthenticated={isAuthenticated} user={user}>
