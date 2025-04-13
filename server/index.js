@@ -11,6 +11,7 @@ import addressRouter from './routes/shop/address.route.js'
 import orderRouter from './routes/shop/order.route.js'
 import adminOrderRouter from './routes/admin/order.route.js'
 import searchRouter from './routes/shop/search.route.js'
+import reviewRouter from './routes/shop/review.route.js'
 
 dotenv.config()
 
@@ -43,6 +44,7 @@ app.use(
   app.use('/api/shop/address',addressRouter)
   app.use('/api/shop/order',orderRouter)
   app.use('/api/shop/search',searchRouter)
+  app.use('/api/shop/review',reviewRouter)
 
   app.get("/", (req, res) => {
     res.send("API is running...");
