@@ -99,6 +99,11 @@ const SummaryApi={
       updateOrderStatus: {
         method: "put",
         url: `${baseUrl}/api/admin/orders/update` 
+      },
+
+      searchResults:{
+        method: "get",
+        url: `${baseUrl}/api/shop/search` 
       }
 
 

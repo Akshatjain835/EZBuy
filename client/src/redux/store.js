@@ -6,7 +6,7 @@ import shopCartSlice from './shop/shoppingCartSlice.js'
 import shopAddressSlice from "./shop/shoppingAddressSlice.js";
 import shopOrderSlice from "./shop/shoppingOrderSlice.js";
 import adminOrderSlice from "./admin/adminOrderSlice.js";
-
+import shopSearchSlice from "./shop/shoppingSearchSlice.js";
 const store = configureStore({
     reducer: {
       auth: authReducer,
@@ -15,7 +15,8 @@ const store = configureStore({
       shopProducts:shopProductsSlice,
       shopCart:shopCartSlice,
       shopAddress:shopAddressSlice,
-      shopOrder:shopOrderSlice
+      shopOrder:shopOrderSlice,
+      shopSearch:shopSearchSlice,
     },
   });
   
