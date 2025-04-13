@@ -113,6 +113,15 @@ const SummaryApi={
         method: "get",
         url: `${baseUrl}/api/shop/review`,
       },
+
+      getCommonImage: {
+        method: "get",
+        url: `${baseUrl}/api/common/feature/get`
+      },
+      addCommonImage: {
+        method: "post",
+        url: `${baseUrl}/api/common/feature/add`
+      }
        
 
 }

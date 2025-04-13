@@ -3,6 +3,7 @@ import ShoppingProductTile from '@/components/shopping-view/ShoppingProductTile'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { useToast } from '@/hooks/use-toast'
+import { getFeatureImages } from '@/redux/common/commonSlice'
 import { addToCart, fetchCartItems } from '@/redux/shop/shoppingCartSlice'
 import { fetchAllFilteredProducts, fetchProductDetails } from '@/redux/shop/shoppingProductSlice'
 import { Airplay, BabyIcon, ChevronLeftIcon, ChevronRightIcon, CloudLightning, Heater, Images, Shirt, ShirtIcon, ShoppingBasket, UmbrellaIcon, WashingMachine, WatchIcon } from 'lucide-react'
@@ -28,10 +29,13 @@ const brandsWithIcon = [
   { id: "h&m", label: "H&M", icon: Heater },
 ];
 const ShoppingHome = () => {
-  const slides=[img-1,img-2,img-3]
+  // const featureImageList=[img-1,img-2,img-3]
   const [currentSlide, setCurrentSlide] = useState(0);
   const { productList, productDetails } = useSelector( (state) => state.shopProducts);
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+
+  const { featureImageList } = useSelector((state) => state.commonFeature);
+  // console.log(featureImageList, "featureImageList");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -79,7 +83,7 @@ const ShoppingHome = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImageList.length);
     }, 15000);
 
     useEffect(() => {
@@ -92,9 +96,13 @@ const ShoppingHome = () => {
     }, [dispatch]);
 
     return () => clearInterval(timer);
-  }, [slides]);
+  }, [featureImageList]);
 
   // console.log(productList, "productList");
+
+  useEffect(() => {
+    dispatch(getFeatureImages());
+  }, [dispatch]);
 
 
   return (
@@ -102,8 +110,8 @@ const ShoppingHome = () => {
     <div className="flex flex-col min-h-screen">
     <div className="relative w-full h-[600px] overflow-hidden">
       {
-      slides && slides.length > 0
-        ? slides.map((slide, index) => (
+      featureImageList && featureImageList.length > 0
+        ? featureImageList.map((slide, index) => (
             <img
               src={slide?.image}
               key={index}
@@ -120,8 +128,8 @@ const ShoppingHome = () => {
         onClick={() =>
           setCurrentSlide(
             (prevSlide) =>
-              (prevSlide - 1 + slides.length) %
-              slides.length
+              (prevSlide - 1 + featureImageList.length) %
+              featureImageList.length
           )
         }
         className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80"
@@ -133,7 +141,7 @@ const ShoppingHome = () => {
         size="icon"
         onClick={() =>
           setCurrentSlide(
-            (prevSlide) => (prevSlide + 1) % slides.length
+            (prevSlide) => (prevSlide + 1) % featureImageList.length
           )
         }
         className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80"

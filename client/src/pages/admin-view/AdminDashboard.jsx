@@ -1,5 +1,6 @@
 import ProductImageUpload from '@/components/admin-view/ProductImageUpload'
 import { Button } from '@/components/ui/button'
+import { addFeatureImage, getFeatureImages } from '@/redux/common/commonSlice';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,7 +13,25 @@ const AdminDashboard = () => {
   const [imageLoadingState, setImageLoadingState] = useState(false);
 
   const dispatch = useDispatch();
+   
+  const { featureImageList } = useSelector((state) => state.commonFeature);
+  // console.log(featureImageList, "featureImageList");
 
+  const  handleUploadFeatureImage=()=>{
+
+    dispatch(addFeatureImage(uploadedImageUrl)).then((data) => {
+      // console.log(data, "data");
+      if (data?.payload?.success) {
+        dispatch(getFeatureImages());
+        setImageFile(null);
+        setUploadedImageUrl("");
+      }
+    });
+  }
+
+  useEffect(() => {
+    dispatch(getFeatureImages());
+  }, [dispatch]);
 
 
   return (
