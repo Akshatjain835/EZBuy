@@ -21,6 +21,7 @@ import { checkAuth } from "@/redux/authslice/authSlice.js";
 import { Skeleton } from "@/components/ui/skeleton.jsx";
 import PaypalReturnPage from "@/pages/shopping-view/PaypalReturnPage.jsx";
 import PaymentSuccessPage from "@/pages/shopping-view/PaymentSuccessPage.jsx";
+import SearchProducts from "@/pages/shopping-view/SearchProducts.jsx";
 
 const AppRouter = () => {
   const { user, isAuthenticated,isLoading } = useSelector((state) => state.auth);
@@ -76,7 +77,8 @@ const AppRouter = () => {
         { path: "account", element: <ShoppingAccount /> },
         { path: "checkout", element: <ShoppingCheckOut /> },
         {path:"paypal-return " , element:<PaypalReturnPage/>},
-        {path:"payment-success", element:<PaymentSuccessPage/>}
+        {path:"payment-success", element:<PaymentSuccessPage/>},
+        { path:"search" , element:<SearchProducts/>}
       ],
     },
     {
