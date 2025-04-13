@@ -1,5 +1,5 @@
 import Router from "express";
-import { getAllOrdersOfAllUsersController, getOrderDetailsForAdminController, updateOrderStatusController } from "../../controllers/admin/order.controller";
+import { getAllOrdersOfAllUsersController, getOrderDetailsForAdminController, updateOrderStatusController } from "../../controllers/admin/order.controller.js";
 
 const adminOrderRouter = Router();
 

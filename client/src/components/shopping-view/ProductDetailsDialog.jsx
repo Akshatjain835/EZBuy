@@ -25,6 +25,7 @@ const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
   }
 
   const handleAddToCart=(getCurrentProductId, getTotalStock)=>{
+    // console.log(cartItems)
     let getCartItems = cartItems.items || [];
 
     if (getCartItems.length) {
