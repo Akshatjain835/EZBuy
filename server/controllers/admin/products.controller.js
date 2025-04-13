@@ -32,7 +32,7 @@ export const addProductController = async (req, res) => {
 
     try {
 
-      const { image,title,description,category,brand,price,salePrice,totalStock} = req.body;
+      const { image,title,description,category,brand,price,salePrice,totalStock,averageReview} = req.body;
   
       
   
@@ -45,6 +45,7 @@ export const addProductController = async (req, res) => {
         price,
         salePrice,
         totalStock,
+        averageReview,
       });
   
       await newlyCreatedProduct.save();
@@ -101,7 +102,7 @@ export const editProductController = async (req, res) => {
       const { id } = req.params;
       // console.log(id)
 
-      const { image, title, description, category, brand, price, salePrice, totalStock} = req.body;
+      const { image, title, description, category, brand, price, salePrice, totalStock ,averageReview} = req.body;
   
       let findProduct = await Product.findById(id);
       // console.log(findProduct)
@@ -131,6 +132,8 @@ export const editProductController = async (req, res) => {
       findProduct.totalStock = totalStock || findProduct.totalStock;
 
       findProduct.image = image || findProduct.image;
+
+      findProduct.averageReview = averageReview || findProduct.averageReview;
   
   
       await findProduct.save();
