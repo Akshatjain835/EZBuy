@@ -104,8 +104,16 @@ const SummaryApi={
       searchResults:{
         method: "get",
         url: `${baseUrl}/api/shop/search` 
-      }
-
+      },
+      addReview: {
+        method: "post",
+        url: `${baseUrl}/api/shop/review/add`,
+      },
+      getReviews: {
+        method: "get",
+        url: `${baseUrl}/api/shop/review`,
+      },
+       
 
 }
 
