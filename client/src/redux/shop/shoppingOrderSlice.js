@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import SummaryApi from "@/common/summaryApi";
 
 
 const initialState = {
@@ -15,7 +16,8 @@ export const createNewOrder = createAsyncThunk( "/order/createNewOrder",
 
     async (orderData) => {
       const response = await axios({
-        ...SummaryApi.createOrder,
+        url: SummaryApi.createOrder.url,
+        method: SummaryApi.createOrder.method,
         data: orderData,
       });
   
@@ -28,8 +30,8 @@ export const capturePayment = createAsyncThunk( "/order/capturePayment",
     async ({ paymentId, payerId, orderId }) => {
 
       const response = await axios({
-        ...SummaryApi.capturePayment,
-
+        url: SummaryApi.capturePayment.url,
+        method: SummaryApi.capturePayment.method,
         data: {
           paymentId,
           payerId,
@@ -46,8 +48,8 @@ export const getAllOrdersByUserId = createAsyncThunk( "/order/getAllOrdersByUser
     async (userId) => {
 
       const response = await axios({
-        ...SummaryApi.getAllOrdersByUserId,
         url: `${SummaryApi.getAllOrdersByUserId.url}/${userId}`,
+        method: SummaryApi.getAllOrdersByUserId.method,
       });
   
       return response.data;
@@ -59,9 +61,8 @@ export const getOrderDetails = createAsyncThunk("/order/getOrderDetails",
     async (id) => {
 
       const response = await axios({
-        ...SummaryApi.getOrderDetails,
         url: `${SummaryApi.getOrderDetails.url}/${id}`,
-
+        method: SummaryApi.getOrderDetails.method,
       });
   
       return response.data;

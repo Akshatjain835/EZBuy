@@ -1,3 +1,4 @@
+import SummaryApi from "@/common/summaryApi";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -9,7 +10,8 @@ const initialState = {
 export const getAllOrdersForAdmin = createAsyncThunk("/order/getAllOrdersForAdmin",
     async () => {
       const response = await axios({
-        ...SummaryApi.getAllOrdersForAdmin,
+        url: SummaryApi.getAllOrdersForAdmin.url,
+        method: SummaryApi.getAllOrdersForAdmin.method,
       });
   
       return response.data;
@@ -20,8 +22,8 @@ export const getOrderDetailsForAdmin = createAsyncThunk("/order/getOrderDetailsF
 
   async (id) => {
     const response = await axios({
-      ...SummaryApi.getOrderDetailsForAdmin,
       url: `${SummaryApi.getOrderDetailsForAdmin.url}/${id}`,
+      method: SummaryApi.getOrderDetailsForAdmin.method,
     });
 
     return response.data;
@@ -32,8 +34,8 @@ export const updateOrderStatus = createAsyncThunk("/order/updateOrderStatus",
 
   async ({ id, orderStatus }) => {
     const response = await axios({
-      ...SummaryApi.updateOrderStatus,
       url: `${SummaryApi.updateOrderStatus.url}/${id}`,
+      method: SummaryApi.updateOrderStatus.method,
       data: { orderStatus },
     });
 

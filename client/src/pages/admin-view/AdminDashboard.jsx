@@ -1,7 +1,7 @@
 import ProductImageUpload from '@/components/admin-view/ProductImageUpload'
 import { Button } from '@/components/ui/button'
 import { addFeatureImage, getFeatureImages } from '@/redux/common/commonSlice';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 const AdminDashboard = () => {

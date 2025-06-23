@@ -11,6 +11,8 @@ import { setProductDetails } from '@/redux/shop/shoppingProductSlice.js'
 import StarRatingComponent from '../common/StarRating'
 import { Input } from '../ui/input'
 import { addReview, getReviews } from '@/redux/shop/shoppingReviewSlice'
+import { useEffect } from 'react';
+
 
 const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
   

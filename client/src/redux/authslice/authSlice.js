@@ -1,3 +1,4 @@
+import SummaryApi from "@/common/summaryApi";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
@@ -6,6 +7,7 @@ const initialState = {
   isAuthenticated: false,
   isLoading: true,
   user: null,
+  token: null,
 };
 
 export const registerUser = createAsyncThunk(
@@ -13,7 +15,7 @@ export const registerUser = createAsyncThunk(
 
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/user/register",
+      SummaryApi.registerUser.url,
       formData,
       {
         withCredentials: true,
@@ -31,7 +33,7 @@ export const loginUser = createAsyncThunk(
     // console.log(formData)
 
     const response = await axios.post(
-      "http://localhost:5000/api/user/login",
+      SummaryApi.loginUser.url,
 
       formData,
       {
@@ -67,7 +69,7 @@ export const logoutUser = createAsyncThunk(
 
   async () => {
     const response = await axios.post(
-      "http://localhost:5000/api/user/logout",
+      SummaryApi.logoutUser.url,
       {},
       {
         withCredentials: true,
@@ -110,12 +112,17 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload.success ? action.payload.user : null;
         state.isAuthenticated = action.payload.success;
+        state.token = action.payload.token;
+        sessionStorage.setItem("token", JSON.stringify(action.payload.token));
+
       })
 
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
+        state.token = null;
+        sessionStorage.removeItem("token");
       })
 
       .addCase(checkAuth.pending, (state) => {

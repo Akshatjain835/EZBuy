@@ -12,7 +12,8 @@ export const addToCart = createAsyncThunk( "cart/addToCart",
     async ({ userId, productId, quantity }) => {
 
         const response = await axios({
-          ...SummaryApi.addToCart,
+          url: SummaryApi.addToCart.url,
+          method: SummaryApi.addToCart.method,
           data: {
             userId,
             productId,
@@ -30,8 +31,8 @@ export const fetchCartItems = createAsyncThunk("cart/fetchCartItems",
     async (userId) => {
 
       const response = await axios({
-        ...SummaryApi.fetchCartItems,
-        url: `${SummaryApi.fetchCartItems.url}/${userId}`
+        url: `${SummaryApi.fetchCartItems.url}/${userId}`,
+        method: SummaryApi.fetchCartItems.method,
       });
     //   console.log(response)
   
@@ -44,8 +45,8 @@ export const deleteCartItem = createAsyncThunk("cart/deleteCartItem",
     async ({ userId, productId }) => {
 
       const response = await axios({
-        ...SummaryApi.deleteCartItem,
         url: `${SummaryApi.deleteCartItem.url}/${userId}/${productId}`,
+        method: SummaryApi.deleteCartItem.method,
       });
   
       return response.data;
@@ -58,7 +59,8 @@ export const updateCartQuantity = createAsyncThunk("cart/updateCartQuantity",
     async ({ userId, productId, quantity }) => {
 
       const response = await axios({
-        ...SummaryApi.updateCartQuantity,
+        url: SummaryApi.updateCartQuantity.url,
+        method: SummaryApi.updateCartQuantity.method,
         data: { 
             userId,
              productId, 

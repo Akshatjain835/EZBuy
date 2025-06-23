@@ -128,7 +128,7 @@ const handleAddtoCart=(getCurrentProductId, getTotalStock)=>{
 
     </div>
     <ProductDetailsDialog
-      open={openDetailsDialog}
+      open={openDetails}
       setOpen={setOpenDetailsDialog}
       productDetails={productDetails}
     />

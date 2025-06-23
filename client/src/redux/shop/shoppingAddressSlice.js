@@ -1,3 +1,4 @@
+import SummaryApi from "@/common/summaryApi";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -8,7 +9,8 @@ const initialState = {
 export const addNewAddress = createAsyncThunk("/addresses/addNewAddress",
     async (formData) => {
       const response = await axios({
-        ...SummaryApi.addNewAddress,
+        url: SummaryApi.addUserAddress.url,
+        method: SummaryApi.addUserAddress.method,
         data: formData,
       });
   
@@ -22,8 +24,8 @@ export const addNewAddress = createAsyncThunk("/addresses/addNewAddress",
         async (userId) => {
 
           const response = await axios({
-            ...SummaryApi.getUserAddresses,
             url: `${SummaryApi.getUserAddresses.url}/${userId}`,
+            method: SummaryApi.getUserAddresses.method,
           });
       
           return response.data;
@@ -37,8 +39,8 @@ export const addNewAddress = createAsyncThunk("/addresses/addNewAddress",
         async ({ userId, addressId, formData }) => {
 
           const response = await axios({
-            ...SummaryApi.updateAddress,
             url: `${SummaryApi.updateAddress.url}/${userId}/${addressId}`,
+            method: SummaryApi.updateAddress.method,
             data: formData,
           });
       
@@ -52,8 +54,8 @@ export const deleteAddress = createAsyncThunk( "/addresses/deleteAddress",
     async ({ userId, addressId }) => {
 
       const response = await axios({
-        ...SummaryApi.deleteAddress,
         url: `${SummaryApi.deleteAddress.url}/${userId}/${addressId}`,
+        method: SummaryApi.deleteAddress.method,
       });
 
   

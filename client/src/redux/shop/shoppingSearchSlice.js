@@ -8,12 +8,12 @@ const initialState = {
 };
 
 export const getSearchResults = createAsyncThunk( "order/getSearchResults",
+  
     async (keyword) => {
 
-      const { method, url } = SummaryApi.searchResults;
       const response = await axios({
-        method,
-        url: `${url}/${keyword}`,
+        method: SummaryApi.searchResults.method,
+        url: `${SummaryApi.searchResults.url}/${keyword}`,
       });
       return response.data;
     }

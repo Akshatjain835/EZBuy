@@ -44,8 +44,8 @@ export const fetchAllProducts = createAsyncThunk( "/products/fetchAllProducts",
     async ({ id, formData }) => {
 
       const result = await axios({
-        method: SummaryApi.editProduct(id).method,
-        url: SummaryApi.editProduct(id).url,
+        method: SummaryApi.editProduct.method,
+        url: `${SummaryApi.editProduct.url}/${id}`,
         data: formData,
         headers: {
           "Content-Type": "application/json",
@@ -61,8 +61,8 @@ export const fetchAllProducts = createAsyncThunk( "/products/fetchAllProducts",
     async(id)=>{
 
       const result = await axios({
-        method: SummaryApi.deleteProduct(id).method,
-        url: SummaryApi.deleteProduct(id).url,
+        method: SummaryApi.deleteProduct.method,
+        url: `${SummaryApi.deleteProduct.url}/${id}`,
       });
        
     //   console.log(result)

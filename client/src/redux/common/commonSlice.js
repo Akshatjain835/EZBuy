@@ -1,3 +1,4 @@
+import SummaryApi from "@/common/summaryApi";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -9,8 +10,7 @@ const initialState = {
 export const getFeatureImages = createAsyncThunk(  "/order/getFeatureImages",
 
     async () => {
-      const { method, url } = SummaryApi.getCommonImage;
-      const response = await axios({ method, url });
+      const response = await axios({ method: SummaryApi.getCommonImage.method, url: SummaryApi.getCommonImage.url });
       return response.data;
     }
   );
@@ -18,10 +18,9 @@ export const getFeatureImages = createAsyncThunk(  "/order/getFeatureImages",
 export const addFeatureImage = createAsyncThunk("/order/addFeatureImage",
 
     async (image) => {
-      const { method, url } = SummaryApi.addCommonImage;
       const response = await axios({
-        method,
-        url,
+        method: SummaryApi.addCommonImage.method,
+        url: SummaryApi.addCommonImage.url,
         data: { image },
       });
       return response.data;

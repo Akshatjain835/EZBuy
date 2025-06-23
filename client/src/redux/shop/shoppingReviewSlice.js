@@ -1,3 +1,4 @@
+import SummaryApi from "@/common/summaryApi";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -9,10 +10,9 @@ const initialState = {
 export const addReview = createAsyncThunk( "/order/addReview",
     
     async (formdata) => {
-      const { method, url } = SummaryApi.addReview; 
       const response = await axios({
-        method,
-        url,
+        method: SummaryApi.addReview.method,
+        url: SummaryApi.addReview.url,
         data: formdata
       });
       return response.data;
@@ -22,11 +22,10 @@ export const addReview = createAsyncThunk( "/order/addReview",
   export const getReviews = createAsyncThunk("/order/getReviews",
 
     async (id) => {
-      const { method, url } = SummaryApi.getReviews;  
 
       const response = await axios({
-        method,
-        url: `${url}/${id}`
+        method: SummaryApi.getReviews.method,
+        url: `${SummaryApi.getReviews.url}/${id}`
       });
       return response.data;
     }

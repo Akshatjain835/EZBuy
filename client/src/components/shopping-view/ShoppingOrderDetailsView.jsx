@@ -1,5 +1,5 @@
 import React from 'react'
-import { DialogContent } from '../ui/dialog'
+import { Dialog, DialogContent } from '../ui/dialog'
 import { Badge } from '../ui/badge'
 import { Label } from '../ui/label'
 import { Separator } from '../ui/separator'

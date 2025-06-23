@@ -19,10 +19,16 @@ export const fetchAllFilteredProducts = createAsyncThunk( "/products/fetchAllPro
       sortBy: sortParams,
     });
 
-    const api = SummaryApi.fetchFilteredProducts(query);
+   
 
     const result = await axios({
-        ...api,
+        url: `${SummaryApi.fetchAllFilteredProducts.url}?${query}`,
+        method: SummaryApi.fetchAllFilteredProducts.method,
+       
+        params: {
+          ...filterParams,
+          sortBy: sortParams,
+        },
       });
     // console.log(result);
 
@@ -34,7 +40,8 @@ export const fetchProductDetails = createAsyncThunk( "/products/fetchProductDeta
 
     async (id) => {
     const result = await axios({
-      ...SummaryApi.fetchProductDetails(id),
+      url: `${SummaryApi.fetchProductDetails.url}/${id}`,
+      method: SummaryApi.fetchProductDetails.method,
     });
 
     console.log(result);
