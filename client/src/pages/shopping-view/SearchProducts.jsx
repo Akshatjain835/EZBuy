@@ -15,7 +15,7 @@ const SearchProducts = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { searchResults } = useSelector((state) => state.shopSearch);
     const dispatch = useDispatch();
-    const { productDetails } = useSelector((state) => state.shopProducts);
+    const { productDetails,productList } = useSelector((state) => state.shopProducts);
     
      const { cartItems } = useSelector((state) => state.shopCart);
      const { toast } = useToast();
@@ -107,28 +107,17 @@ const handleAddtoCart=(getCurrentProductId, getTotalStock)=>{
       </div>
     </div>
 
-    {
-
-    !searchResults.length ? (
-      <h1 className="text-5xl font-extrabold">No result found!</h1>
-    ) : null
-    
-    }
-
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-      {
-      searchResults.map((item) => (
-        <ShoppingProductTile
-          handleAddtoCart={handleAddtoCart}
-          product={item}
-          handleGetProductDetails={handleGetProductDetails}
-        />
-      ))
-      }
+        {searchResults && searchResults.length ? (
+          searchResults.map((item) => <ShoppingProductTile handleGetProductDetails={handleGetProductDetails} handleAddtoCart={handleAddtoCart} product={item} />)
+        ) : (
+          <h1 className="text-5xl font-extrabold">Nothing found here...</h1>
+        )}
+      </div>
 
-    </div>
+  
     <ProductDetailsDialog
-      open={openDetails}
+      open={openDetailsDialog}
       setOpen={setOpenDetailsDialog}
       productDetails={productDetails}
     />

@@ -4,28 +4,26 @@ import CommonForm from '@/components/common/CommonForm';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { addProductFormElements } from '@/config';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast'
 import { addNewProduct, deleteProduct, editProduct, fetchAllProducts } from '@/redux/admin/adminProductSlice.js';
 import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
+const initialFormData = {
+  image: null,
+  title: "",
+  description: "",
+  category: "",
+  brand: "",
+  price: "",
+  salePrice: "",
+  totalStock: "",
+  averageReview: "",
+  
+};
 
 const AdminProducts = () => {
   
-
-
-  const initialFormData = {
-    image: null,
-    title: "",
-    description: "",
-    category: "",
-    brand: "",
-    price: "",
-    salePrice: "",
-    totalStock: "",
-    
-  };
-
   const [openCreateProductsDialog, setOpenCreateProductsDialog]=useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [imageFile, setImageFile] = useState(null);
@@ -99,8 +97,9 @@ const AdminProducts = () => {
   const isFormValid=()=>{
 
     return Object.keys(formData)
-      .map((key)=>formData[key]!=="")
-      .every((item)=>item)
+      .filter((currentKey) => currentKey !== "averageReview")
+      .map((key) => formData[key] !== "")
+      .every((item) => item);
   }
 
   useEffect(() => {
@@ -121,6 +120,7 @@ const AdminProducts = () => {
         {productList && productList.length > 0
           ? productList.map((productItem) => (
               <AdminProductTile
+                key={productItem._id}
                 setFormData={setFormData}
                 setOpenCreateProductsDialog={setOpenCreateProductsDialog}
                 setCurrentEditedId={setCurrentEditedId}

@@ -13,4 +13,4 @@ const  client=()=> {
   return new paypal.core.PayPalHttpClient(environment());
 }
 
-export default{ paypal, client};
+export { paypal, client};

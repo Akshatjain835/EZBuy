@@ -5,7 +5,7 @@ import { loginFormControls } from '@/config/index.js';
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { loginUser } from '@/redux/authslice/authSlice.js';
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from '@/hooks/use-toast'
 
 const initialState = {
   email: "",

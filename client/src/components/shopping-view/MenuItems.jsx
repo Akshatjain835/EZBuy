@@ -1,12 +1,13 @@
 import React from 'react'
 import { Label } from '../ui/label'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate ,useSearchParams} from 'react-router-dom';
 import { shoppingViewHeaderMenuItems } from '@/config';
 
 const MenuItems = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams(); 
 
   const handleNavigate=(getCurrentMenuItem)=>{
 

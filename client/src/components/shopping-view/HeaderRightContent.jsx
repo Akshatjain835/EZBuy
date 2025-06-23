@@ -1,5 +1,6 @@
 import { logoutUser } from '@/redux/authslice/authSlice';
-import { LogOut, Sheet, ShoppingCart, UserCog } from 'lucide-react';
+import { LogOut, ShoppingCart, UserCog } from 'lucide-react';
+import { Sheet } from '../ui/sheet';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +9,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { Avatar, AvatarFallback } from '../ui/avatar';
 import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu';
 import UserCartWrapper from './UserCartWrapper';
+import { fetchCartItems } from '@/redux/shop/shoppingCartSlice';
 
 
 const HeaderRightContent=()=>{
@@ -28,7 +30,7 @@ const HeaderRightContent=()=>{
 
     useEffect(() => {
       dispatch(fetchCartItems(user?.id));
-    }, [dispatch]);
+    }, [dispatch, user?.id]);
 
 
     // console.log(cartItems, "Akshat ");

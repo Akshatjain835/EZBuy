@@ -69,6 +69,7 @@ export const fetchAllProducts = createAsyncThunk( "/products/fetchAllProducts",
       return result?.data;
     }
   );
+  
 
 const AdminProductsSlice = createSlice({
   name: "adminProducts",
@@ -91,3 +92,4 @@ const AdminProductsSlice = createSlice({
 });
 
 export default AdminProductsSlice.reducer;
+

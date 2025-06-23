@@ -2,7 +2,7 @@ import React from 'react'
 
 const AdminFeatures = () => {
   return (
-    <div>AdminFeatures</div>
+    <div>Admin Features</div>
   )
 }
 

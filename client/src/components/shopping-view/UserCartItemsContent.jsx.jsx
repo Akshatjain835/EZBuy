@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '../ui/button'
 import { Minus, Plus, Trash } from 'lucide-react'
-import { deleteCartItem } from '@/redux/shop/shoppingCartSlice'
+import { deleteCartItem, updateCartQuantity } from '@/redux/shop/shoppingCartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useToast } from '@/hooks/use-toast'
 
@@ -30,7 +30,7 @@ const handleCartItemDelete=(getCartItem)=>{
 
 const handleUpdateQuantity=(getCartItem, typeOfAction)=>{
 
-  if (typeOfAction == "plus") {
+  if (typeOfAction === "plus") {
     let getCartItems = cartItems.items || [];
 
     if (getCartItems.length) {
@@ -108,7 +108,7 @@ const handleUpdateQuantity=(getCartItem, typeOfAction)=>{
           onClick={() => handleUpdateQuantity(cartItem, "plus")}
         >
           <Plus className="w-4 h-4" />
-          <span className="sr-only">Decrease</span>
+          <span className="sr-only">Increase</span>
         </Button>
       </div>
     </div>

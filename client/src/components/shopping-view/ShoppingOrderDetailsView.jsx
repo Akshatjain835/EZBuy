@@ -1,17 +1,16 @@
 import React from 'react'
-import { Dialog, DialogContent } from '../ui/dialog'
 import { Badge } from '../ui/badge'
 import { Label } from '../ui/label'
 import { Separator } from '../ui/separator'
 import { useSelector } from 'react-redux'
 
 const ShoppingOrderDetailsView = ({orderDetails}) => {
+    
     const { user } = useSelector((state) => state.auth);
 
   return (
-    <Dialog>
-
-    <DialogContent className="sm:max-w-[600px]">
+ 
+    <div className="sm:max-w-[600px]">
 
     <div className="grid gap-6">
       <div className="grid gap-2">
@@ -27,7 +26,7 @@ const ShoppingOrderDetailsView = ({orderDetails}) => {
         </div>
 
         <div className="flex mt-2 items-center justify-between">
-          <p className="font-medium">Order Price</p>
+          <p className="font-medium">Price</p>
           <Label>${orderDetails?.totalAmount}</Label>
         </div>
 
@@ -66,18 +65,24 @@ const ShoppingOrderDetailsView = ({orderDetails}) => {
           <div className="font-medium">Order Details</div>
           
           <ul className="grid gap-3">
-            {
-            orderDetails?.cartItems && orderDetails?.cartItems.length > 0
-              ? orderDetails?.cartItems.map((item) => (
-                  <li className="flex items-center justify-between">
-                    <span>Title: {item.title}</span>
-                    <span>Quantity: {item.quantity}</span>
-                    <span>Price: ${item.price}</span>
-                  </li>
-                ))
-              : null
-              }
-          </ul>
+              {orderDetails?.cartItems &&
+              orderDetails?.cartItems?.length > 0 ? (
+                <li className="flex justify-between font-semibold border-b pb-1">
+                  <span className="w-1/3">Title</span>
+                  <span className="w-1/3 text-center">Quantity</span>
+                  <span className="w-1/3 text-right">Price</span>
+                </li>
+              ) : null}
+              {orderDetails?.cartItems && orderDetails?.cartItems?.length > 0
+                ? orderDetails?.cartItems?.map((item) => (
+                    <li className="flex items-center justify-between">
+                      <span className="w-1/3">{item.title}</span>
+                      <span className="w-1/3 text-center">{item.quantity}</span>
+                      <span className="w-1/3 text-right">${item.price}</span>
+                    </li>
+                  ))
+                : null}
+            </ul>
         </div>
       </div>
 
@@ -96,8 +101,8 @@ const ShoppingOrderDetailsView = ({orderDetails}) => {
       </div>
     </div>
 
-  </DialogContent>
-  </Dialog>
+  </div>
+
   )
 }
 

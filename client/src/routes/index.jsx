@@ -32,20 +32,15 @@ const AppRouter = () => {
     dispatch(checkAuth());
   }, [dispatch]);
 
-  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+  
 
   // console.log(isLoading, user);
 
 
   const routes = useRoutes([
     {
-          path:"/",
-          element:(
-            <CheckAuth
-              isAuthenticated={isAuthenticated}
-              user={user}
-            ></CheckAuth>
-          )
+      path: "/",
+      element: <CheckAuth isAuthenticated={isAuthenticated} user={user} />
     },
     {
       path: "/auth",

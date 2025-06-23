@@ -4,8 +4,9 @@ import Address from '@/components/shopping-view/Address';
 import UserCartItemsContent from '@/components/shopping-view/UserCartItemsContent.jsx';
 import { Button } from '@/components/ui/button';
 import { useDispatch, useSelector } from 'react-redux';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast'
 import { createNewOrder } from '@/redux/shop/shoppingOrderSlice';
+
 const ShoppingCheckOut = () => {
 
   const { cartItems } = useSelector((state) => state.shopCart);
@@ -114,7 +115,7 @@ const ShoppingCheckOut = () => {
         <div className="flex flex-col gap-4">
           {cartItems && cartItems.items && cartItems.items.length > 0
             ? cartItems.items.map((item) => (
-                <UserCartItemsContent cartItem={item} />
+                <UserCartItemsContent key={item._id} cartItem={item} />
               ))
             : null}
           <div className="mt-8 space-y-4">

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import CommonForm from '../common/CommonForm'
 import { addressFormControls } from '@/config';
-import { deleteAddress, editaAddress, fetchAllAddresses } from '@/redux/shop/shoppingAddressSlice';
-import { toast } from '@/hooks/use-toast';
+import { addNewAddress, deleteAddress, editaAddress, fetchAllAddresses } from '@/redux/shop/shoppingAddressSlice';
+import { useToast } from '@/hooks/use-toast'
 import { useDispatch, useSelector } from 'react-redux';
+import AddressCard from './AddressCard';
 
 
 const Address = ({setCurrentSelectedAddress}) => {
@@ -110,7 +111,7 @@ const Address = ({setCurrentSelectedAddress}) => {
 
     useEffect(() => {
       dispatch(fetchAllAddresses(user?.id));
-    }, [dispatch]);
+    }, [dispatch, user?.id]);
    
     // console.log(addressList, "addressList");
     
@@ -119,11 +120,11 @@ const Address = ({setCurrentSelectedAddress}) => {
       <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2  gap-2">
         {
         addressList && addressList.length > 0
-          ? addressList.map((singleAddressItem) => (
+          ? addressList.map((addressItem) => (
               <AddressCard
-                selectedId={selectedId}
+                selectedId={currentEditedId} 
                 handleDeleteAddress={handleDeleteAddress}
-                addressInfo={singleAddressItem}
+                addressInfo={addressItem}
                 handleEditAddress={handleEditAddress}
                 setCurrentSelectedAddress={setCurrentSelectedAddress}
               />

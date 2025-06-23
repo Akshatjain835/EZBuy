@@ -6,6 +6,8 @@ import { Skeleton } from "../ui/skeleton";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary.js";
 import { Button } from "../ui/button";
 
+
+
 const ProductImageUpload = ({
   imageFile,
   setImageFile,

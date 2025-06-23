@@ -70,7 +70,7 @@ const ShoppingListing = () => {
     dispatch(fetchProductDetails(getCurrentProductId));
   }
 
-  const handleAddtoCart=(getCurrentProductId)=>{
+  const handleAddtoCart=(getCurrentProductId,getTotalStock)=>{
     // console.log(cartItems,"cartitemssection");
     let getCartItems = cartItems.items || [];
 
@@ -153,7 +153,7 @@ const ShoppingListing = () => {
 
         <div className="flex items-center gap-3">
           <span className="text-muted-foreground">
-            100 Products
+          {productList?.length}  Products
           </span>
 
           <DropdownMenu>
@@ -194,6 +194,7 @@ const ShoppingListing = () => {
           {productList && productList.length > 0
             ? productList.map((productItem) => (
                 <ShoppingProductTile
+                key={productItem._id}
                 handleGetProductDetails={handleGetProductDetails}
                 product={productItem}
                 handleAddtoCart={handleAddtoCart}

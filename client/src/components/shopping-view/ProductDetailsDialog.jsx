@@ -15,17 +15,14 @@ import { useEffect } from 'react';
 
 
 const ProductDetailsDialog = ({open,setOpen,productDetails}) => {
-  
-  if (!productDetails) return null; 
-  
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
   const [reviewMsg, setReviewMsg] = useState("");
   const [rating, setRating] = useState(0);
   const { reviews } = useSelector((state) => state.shopReview);
-
   const { toast } = useToast();
+  
 
   const  handleRatingChange=(getRating)=>{
     // console.log(getRating, "getRating");

@@ -1,6 +1,6 @@
 import CommonForm from '@/components/common/CommonForm.jsx'
 import { registerFormControls } from '@/config/index.js';
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from '@/hooks/use-toast'
 import { registerUser } from '@/redux/authslice/authSlice.js';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
@@ -22,7 +22,7 @@ const Register = () => {
   const { toast } = useToast();
   
 
-  function onSubmit(e) {
+  const onSubmit = (e) => {
 
     e.preventDefault();
 

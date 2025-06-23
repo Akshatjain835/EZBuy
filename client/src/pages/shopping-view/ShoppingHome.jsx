@@ -37,6 +37,8 @@ const ShoppingHome = () => {
   const { featureImageList } = useSelector((state) => state.commonFeature);
   // console.log(featureImageList, "featureImageList");
 
+  const { user } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -82,21 +84,21 @@ const ShoppingHome = () => {
   }, [productDetails]);
 
   useEffect(() => {
+    dispatch(
+      fetchAllFilteredProducts({
+        filterParams: {},
+        sortParams: "price-lowtohigh",
+      })
+    );
+  }, [dispatch]);
+
+  useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImageList.length);
-    }, 15000);
-
-    useEffect(() => {
-      dispatch(
-        fetchAllFilteredProducts({
-          filterParams: {},
-          sortParams: "price-lowtohigh",
-        })
-      );
-    }, [dispatch]);
+    }, 3000);
 
     return () => clearInterval(timer);
-  }, [featureImageList]);
+  }, [featureImageList.length]);
 
   // console.log(productList, "productList");
 
@@ -161,6 +163,7 @@ const ShoppingHome = () => {
               onClick={() =>
                 handleNavigateToListingPage(categoryItem, "category")
               }
+              key={categoryItem.label}
               className="cursor-pointer hover:shadow-lg transition-shadow"
             >
               <CardContent className="flex flex-col items-center justify-center p-6">

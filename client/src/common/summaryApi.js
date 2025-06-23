@@ -55,7 +55,7 @@ const SummaryApi={
         method: "post",
       },
       getUserAddresses:{
-        url: `${baseUrl}/api/shop/address/get/`,
+        url: `${baseUrl}/api/shop/address/get`,
         method: "get",
       },
       updateAddress: {
@@ -74,7 +74,7 @@ const SummaryApi={
       },
       capturePayment: {
         method: "post",
-        url: `${baseUrl}/api/shop/order/save`,
+        url: `${baseUrl}/api/shop/order/capture`,
       },
       getAllOrdersByUserId: {
         method: "get",

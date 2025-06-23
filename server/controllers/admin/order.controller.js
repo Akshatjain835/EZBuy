@@ -7,7 +7,7 @@ export const getAllOrdersOfAllUsersController = async (req, res) => {
       if (!orders.length) {
         return res.status(404).json({
           success: false,
-          message: "No orders found!",
+          message: "No orders found!",  
         });
       }
   

@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
 //Akshat
@@ -45,12 +46,11 @@ const AdminProductTile = ({
           >
             Edit
           </Button>
-
           <Button onClick={() => handleDelete(product?._id)}>Delete</Button>
         </CardFooter>
       </div>
     </Card>
   );
-};
+}
 
 export default AdminProductTile;

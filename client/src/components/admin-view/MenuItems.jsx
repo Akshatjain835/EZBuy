@@ -22,14 +22,14 @@ const adminSidebarMenuItems = [
     },
   ];
   
-const MenuItems=({ setOpen })=>{
+const MenuItems=({ setOpen, items })=>{
     const navigate = useNavigate();
   
     return (
 
       <nav className="mt-8 flex-col flex gap-2">
         {
-        adminSidebarMenuItems.map((menuItem) => (
+        items.map((menuItem) => (
           <div
             key={menuItem.id}
             onClick={() => {
