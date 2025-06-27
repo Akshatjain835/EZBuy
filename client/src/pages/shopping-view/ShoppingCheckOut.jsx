@@ -9,6 +9,7 @@ import { createNewOrder } from '@/redux/shop/shoppingOrderSlice';
 
 const ShoppingCheckOut = () => {
 
+
   const { cartItems } = useSelector((state) => state.shopCart);
   // console.log(cartItems)
   const { user } = useSelector((state) => state.auth);
@@ -17,9 +18,11 @@ const ShoppingCheckOut = () => {
   // console.log(currentSelectedAddress, "currentSelectedAddress")
   const [isPaymentStart, setIsPaymemntStart] = useState(false);
 
+
   const dispatch = useDispatch();
   const { toast } = useToast();
-  
+  // console.log(cartItems, "cartItems")
+
   const totalCartAmount =
     cartItems && cartItems.items && cartItems.items.length > 0
       ? cartItems.items.reduce(
@@ -35,8 +38,8 @@ const ShoppingCheckOut = () => {
 
 
  const handleInitiatePaypalPayment=()=>{
-
-        if (cartItems.length === 0) {
+    //  console.log(cartItems, "cartItems")
+        if (cartItems.items.length === 0) {
 
           toast({
             title: "Your cart is empty. Please add items to proceed",

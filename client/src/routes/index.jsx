@@ -22,6 +22,7 @@ import { Skeleton } from "@/components/ui/skeleton.jsx";
 import PaypalReturnPage from "@/pages/shopping-view/PaypalReturnPage.jsx";
 import PaymentSuccessPage from "@/pages/shopping-view/PaymentSuccessPage.jsx";
 import SearchProducts from "@/pages/shopping-view/SearchProducts.jsx";
+import PaymentCancelPage from "@/pages/shopping-view/PaymentCancel.jsx";
 
 const AppRouter = () => {
   const { user, isAuthenticated,isLoading } = useSelector((state) => state.auth);
@@ -80,9 +81,10 @@ const AppRouter = () => {
         { path: "listing", element: <ShoppingListing /> },
         { path: "account", element: <ShoppingAccount /> },
         { path: "checkout", element: <ShoppingCheckOut /> },
-        {path:"paypal-return " , element:<PaypalReturnPage/>},
-        {path:"payment-success", element:<PaymentSuccessPage/>},
-        { path:"search" , element:<SearchProducts/>}
+        { path: "paypal-return", element: <PaypalReturnPage /> },
+        { path: "payment-success", element: <PaymentSuccessPage /> },
+        { path: "payment-cancel", element: <PaymentCancelPage /> },
+        { path: "search", element: <SearchProducts /> }
       ],
     },
     {
@@ -90,7 +92,7 @@ const AppRouter = () => {
       element: <UnauthPage />,
     },
     {
-      path: "*",
+      path: "/*",
       element: <NotFound />,
     },
   ]);

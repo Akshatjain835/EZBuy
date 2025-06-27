@@ -3,6 +3,7 @@ import { capturePayment } from '@/redux/shop/shoppingOrderSlice';
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { fetchCartItems } from '@/redux/shop/shoppingCartSlice';
 
 const PaypalReturnPage = () => {
 
@@ -18,17 +19,19 @@ const PaypalReturnPage = () => {
       if (payerId && orderID) {
 
         const orderId = JSON.parse(sessionStorage.getItem("currentOrderId"));
+        console.log(orderId, "orderId");
   
         dispatch(capturePayment({ paymentId: orderID, payerId, orderId })).then(
           (data) => {
             if (data?.payload?.success) {
               sessionStorage.removeItem("currentOrderId");
+              dispatch(fetchCartItems(user.id))
               window.location.href = "/shop/payment-success";
             }
           }
         );
       }
-    }, [orderID, payerId, dispatch]);
+    }, [orderID, payerId, dispatch,user.id]);
   return (
   <Card>
     <CardHeader>

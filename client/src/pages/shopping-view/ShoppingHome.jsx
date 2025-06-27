@@ -183,6 +183,7 @@ const ShoppingHome = () => {
           {
           brandsWithIcon.map((brandItem) => (
             <Card
+              key={brandItem.label}
               onClick={() => handleNavigateToListingPage(brandItem, "brand")}
               className="cursor-pointer hover:shadow-lg transition-shadow"
             >
@@ -205,6 +206,7 @@ const ShoppingHome = () => {
           {productList && productList.length > 0
             ? productList.map((productItem) => (
                 <ShoppingProductTile
+                  key={productItem.id}
                   handleGetProductDetails={handleGetProductDetails}
                   product={productItem}
                   handleAddtoCart={handleAddtoCart}

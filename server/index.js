@@ -17,14 +17,14 @@ import featureRouter from './routes/common/feature.route.js'
 dotenv.config()
 
 const app=express();
-const PORT=process.env.PORT || 5000;
+const PORT=process.env.PORT;
 
 //middleware
 app.use(express.json())
 app.use(cookieParser())
 app.use(
     cors({
-      origin: "http://localhost:5173",
+      origin:process.env.CLIENT_URL,
       methods: ["GET", "POST", "DELETE", "PUT"],
       allowedHeaders: [
         "Content-Type",

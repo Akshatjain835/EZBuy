@@ -7,6 +7,7 @@ import { Button } from '../ui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminOrderDetailsView from './AdminOrderDetailsView';
 import { getAllOrdersForAdmin, getOrderDetailsForAdmin, resetOrderDetails } from '@/redux/admin/adminOrderSlice';
+import { DialogContent } from '@radix-ui/react-dialog';
 
 const AdminOrdersView = () => {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);

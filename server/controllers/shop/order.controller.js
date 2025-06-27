@@ -7,7 +7,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const createOrderController = async (req, res) => {
+
     try {
+
       const {  userId,  cartItems,  addressInfo,  orderStatus,  paymentMethod,  paymentStatus,  totalAmount,  orderDate,  orderUpdateDate,  paymentId,  payerId,cartId, } = req.body;
   
       const request = new paypal.orders.OrdersCreateRequest();
@@ -71,8 +73,9 @@ export const createOrderController = async (req, res) => {
         approvalURL,
         orderId: newlyCreatedOrder._id,
       });
+      
     } catch (error) {
-      console.error("CREATE ORDER ERROR:", error);
+      
       res.status(500).json({
         success: false,
         message: "Error occurred!",
