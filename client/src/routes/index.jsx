@@ -9,11 +9,7 @@ import AdminProducts from "@/pages/admin-view/AdminProducts.jsx";
 import AdminOrders from "@/pages/admin-view/AdminOrders.jsx";
 import AdminFeatures from "@/pages/admin-view/AdminFeatures.jsx";
 import ShoppingLayout from "@/components/shopping-view/ShoppingLayout.jsx";
-<<<<<<< HEAD
 
-=======
-import NotFound from "@/pages/notfound/NotFound.jsx";
->>>>>>> b7c0caae63dd577e5ff278008db84567b8bb6eb1
 import ShoppingHome from "@/pages/shopping-view/ShoppingHome.jsx";
 import ShoppingListing from "@/pages/shopping-view/ShoppingListing.jsx";
 import ShoppingAccount from "@/pages/shopping-view/ShoppingAccount.jsx";
@@ -35,7 +31,8 @@ const AppRouter = () => {
 
   
   useEffect(() => {
-    dispatch(checkAuth());
+    const token = JSON.parse(sessionStorage.getItem("token"));
+    dispatch(checkAuth(token));
   }, [dispatch]);
 
   

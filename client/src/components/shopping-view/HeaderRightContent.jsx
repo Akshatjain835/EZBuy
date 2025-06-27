@@ -1,4 +1,4 @@
-import { logoutUser } from '@/redux/authslice/authSlice';
+import { logoutUser, resetTokenAndCredentials } from '@/redux/authslice/authSlice';
 import { LogOut, ShoppingCart, UserCog } from 'lucide-react';
 import { Sheet } from '../ui/sheet';
 import React, { useEffect, useState } from 'react'
@@ -25,7 +25,9 @@ const HeaderRightContent=()=>{
 
   
     const handleLogout=()=>{
-      dispatch(logoutUser());
+      dispatch(resetTokenAndCredentials())
+      sessionStorage.clear()
+      navigate('/auth/login')
     }
 
     useEffect(() => {

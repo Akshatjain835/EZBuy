@@ -48,12 +48,14 @@ export const loginUser = createAsyncThunk(
 export const checkAuth = createAsyncThunk(
   "/auth/checkauth",
 
-  async () => {
+  
+
+  async (token) => {
     const response = await axios.get(
       `${import.meta.env.VITE_API_URL}/api/user/check-auth`,
       {
-        withCredentials: true,
         headers: {
+          Authorization: `Bearer ${token}`,
           "Cache-Control":
             "no-store, no-cache, must-revalidate, proxy-revalidate",
         },
@@ -85,6 +87,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {},
+    resetTokenAndCredentials: (state) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.token = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -146,6 +153,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser } = authSlice.actions;
+export const { setUser,resetTokenAndCredentials} = authSlice.actions;
 
 export default authSlice.reducer;
