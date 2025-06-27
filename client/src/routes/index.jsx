@@ -9,7 +9,7 @@ import AdminProducts from "@/pages/admin-view/AdminProducts.jsx";
 import AdminOrders from "@/pages/admin-view/AdminOrders.jsx";
 import AdminFeatures from "@/pages/admin-view/AdminFeatures.jsx";
 import ShoppingLayout from "@/components/shopping-view/ShoppingLayout.jsx";
-import NotFound from "@/pages/notfound/notfound.jsx";
+import NotFound from "@/pages/notfound/NotFound.jsx";
 import ShoppingHome from "@/pages/shopping-view/ShoppingHome.jsx";
 import ShoppingListing from "@/pages/shopping-view/ShoppingListing.jsx";
 import ShoppingAccount from "@/pages/shopping-view/ShoppingAccount.jsx";
