@@ -3,11 +3,13 @@ import { Button } from '../ui/button'
 import { AlignJustify, LogOut } from 'lucide-react'
 import { logoutUser, resetTokenAndCredentials } from '@/redux/authslice/authSlice.js';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const AdminHeader = ({setOpen}) => {
 
   const dispatch = useDispatch();
+  const navigate=useNavigate();
 
   function handleLogout() {
      // dispatch(logoutUser());
